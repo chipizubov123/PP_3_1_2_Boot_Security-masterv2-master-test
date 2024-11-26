@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit User</title>
+</head>
+<body>
+<h2>Edit user</h2>
+<div>
+
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Exit">
+    </form>
+    <br/>
+    <form th:method="PATCH" th:action="@{/admin/users/{id}/edit(id=${user.getId()})}" th:object="${user}">
+        <fieldset>
+            <legend>User info</legend>
+            <p>
+                <label th:for="username">username</label>
+                <input type="text" name="username" th:id="username" th:value="${user.getUsername()}">
+            </p>
+            <p>
+                <label th:for="email">Email</label>
+                <input type="text" name="email" th:id="email" th:value="${user.getEmail()}"><br/>
+            </p>
+            <p>
+                <label th:for="password">Password</label>
+                <input type="password" name="password" th:id="password"><br/>
+            </p>
+            <p>
+                <label>
+                    <select size="3" multiple="multiple" name="roles" id="roles">
+                        <option disabled>Roles:</option>
+                        <option value="ROLE_ADMIN">ADMIN</option>
+                        <option value="ROLE_USER">USER</option>
+                    </select>
+                </label>
+            </p>
+        </fieldset>
+        <button style="background: #6fbda9" type="submit">Edit info</button>
+    </form>
+
+    <br/>
+    <form th:action="@{/admin/users}">
+        <button style="background: #88e8d8" type="submit">Back to all users</button>
+    </form>
+</div>
+</body>
+</html>
